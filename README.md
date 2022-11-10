@@ -15,7 +15,7 @@ Vignette: [http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/d
 
 ## Data
 
-I will use the data from [https://portal.gdc.cancer.gov/repository](https://portal.gdc.cancer.gov/repository). Examining clinical data, there are 190 tumor samples (but 205 files in total, as some samples have relapses and thus two associated files), and 144 are whites and 46 are asians. The specific files are available in the repository.
+I will use the data from [https://portal.gdc.cancer.gov/repository](https://portal.gdc.cancer.gov/repository). Examining clinical data, there are 190 tumor samples (but 205 files in total, as some samples have relapses and thus two associated files), and 144 are whites and 46 are asians. The specific files are available in the repository: https://github.com/Loe-zou/Final-Project/blob/main/clinical.tsv.
 
 
 ## Milestone 1
