@@ -1,5 +1,7 @@
 # Final Project Outline
 
+## Request for an extenstion due to a bad fever (Onset Nov 21, 2022, expected meeting: Nov 28, 2022, available time: any time expect 1-3pm, preferably via Zoom).
+
 ## Title
 Differential Gene Expression in TCGA within Stage II gastric cancer between asian and white using DeSEQ2.
 
