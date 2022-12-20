@@ -23,7 +23,7 @@ I will use the data from [GDC Portal](https://portal.gdc.cancer.gov/repository).
 ## Method - Data Wrangling and Input
 
 ```{bash}
-awk'{print $4}' AASX.tsv > AASX.txt
+awk'{print $4}' sample_ID.tsv > sample_ID.txt
 ```
 
 
