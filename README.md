@@ -2,6 +2,8 @@
 
 ## Request for an extenstion due to a bad fever (Onset Nov 21, 2022, expected meeting: Nov 28, 2022, available time: any time expect 1-3pm, preferably via Zoom).
 
+##Updated Dec 15: Confirmed Covid and still experiencing symptoms, new deadline is Dec 16 with double extension.
+
 ## Title
 Differential Gene Expression in TCGA within Stage II gastric cancer between asian and white using DeSEQ2.
 
@@ -10,15 +12,29 @@ Linghao Zou (Loe)
 
 ## Overview of project
 
-I will identify differentially expressed genes between Stomach Cancer Adenocarcomas and Adenocarcinomas for white and vs. asians. This analysis will utilize the package DeSEQ2 and follow the specific vignette: [http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html](DESEQ). For this analysis, I'll use the TCGA cohort and have identified 205 star_counts open files for tumors that fit within my cohort with 144 whites and 46 asians. Within the analysis, I will control for gender, age and disease type.
+I identified differentially expressed genes between Stomach Cancer Adenocarcomas and Adenocarcinomas for white and vs. asians. This analysis will utilize the package DeSEQ2 and follow the specific [vignette](http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)(DESEQ). For this analysis, I'll use the TCGA cohort and have identified 205 star_counts open files for tumors that fit within my cohort with 144 whites and 46 asians. Within the analysis, I will control for gender, age and disease type.
 
-Vignette: [http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html
-](http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+[Vignette and bioconductor source link](http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
 
 ## Data
 
-I will use the data from [https://portal.gdc.cancer.gov/repository](https://portal.gdc.cancer.gov/repository). Examining clinical data, there are 190 tumor samples (but 205 files in total, as some samples have relapses and thus two associated files), and 144 are whites and 46 are asians. The specific files are available in the repository: https://github.com/Loe-zou/Final-Project/blob/main/clinical.tsv.
+I will use the data from [GDC Portal](https://portal.gdc.cancer.gov/repository). Examining clinical data, there are 190 tumor samples (but 205 files in total, as some samples have relapses and thus two associated files), and 144 are whites and 46 are asians. The specific files are available in the repository [here](https://github.com/Loe-zou/Final-Project/blob/main/clinical.tsv).
 
+## Method - Data Wrangling and Input
+
+```{bash}
+awk'{print $4}' AASX.tsv > AASX.txt
+```
+
+
+
+
+
+
+
+
+
+*********
 
 ## Milestone 1
 
