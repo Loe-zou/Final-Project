@@ -40,22 +40,22 @@ awk'{print $4}' sample_ID.tsv > sample_ID.txt
 
 > Define the milestone based on initial view of the data.
 
-**Due Date:** Tuesday November 22nd
+**Due Date:** Feb 16
 
 ** Data fully loaded into vignette through DESeq2 steps (Star-Count section) ** I will complete an entire first draft of analysis analyzed through the vignette.
 
 
-## Milestone 2
+## Milestone 2 Due on Feb 23
 
 > Define the milestone 2 which includes initial running of the entire vignette for feedback.
 
-**Due Date:** Tuesday November 29th
+**Due Date:** Tuesday March 1
 
 **An initial completion of vignette.** I will complete an entire first draft of analysis analyzed through the vignette. Data loaded into vignette (through star_count), for seeking feedback.  Not all sections in the writing will be completed, but will be final project.
 
 
 ## Deliverable
 
-**Due Date:** December 3rd 11:50pm
+**Due Date:** March 7
 
 A complete repository with clear documentation and description of the analysis and results will be delivered by the due date.
