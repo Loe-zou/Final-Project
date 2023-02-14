@@ -11,9 +11,7 @@ Linghao Zou (Loe)
 
 ## Overview of project
 
-I identified differentially expressed genes between Stomach Cancer Adenocarcomas and Adenocarcinomas for white and vs. asians. This analysis will utilize the package DeSEQ2 and follow the specific [vignette](http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)(DESEQ). For this analysis, I'll use the TCGA cohort and have identified 205 star_counts open files for tumors that fit within my cohort with 144 whites and 46 asians. Within the analysis, I will control for gender, age and disease type.
-
-[Vignette and bioconductor source link](http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+I identified differentially expressed genes between Stomach Cancer Adenocarcomas and Adenocarcinomas for white and vs. asians. This analysis will utilize the package DeSEQ2 and follow the specific [vignette](http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)(DESEQ). For this analysis, I'll use the TCGA cohort and have identified 205 star_counts open files for tumors that fit within my cohort with 144 whites and 46 asians. Within the analysis, I will control for gender, age and disease type. [Vignette and bioconductor](http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
 
 ## Data
 
