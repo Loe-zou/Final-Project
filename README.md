@@ -1,7 +1,6 @@
 # Final Project Outline
 
-
-##Updated Dec 15: Confirmed Covid and still experiencing symptoms, new deadline is Dec 16 with double extension.
+##The makeup for this project starts on Feb 10.
 
 ## Title
 Differential Gene Expression in TCGA within Stage II gastric cancer between asian and white using DeSEQ2.
