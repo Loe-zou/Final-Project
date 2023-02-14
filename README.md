@@ -1,6 +1,5 @@
 # Final Project Outline
 
-## Request for an extenstion due to a bad fever (Onset Nov 21, 2022, expected meeting: Nov 28, 2022, available time: any time expect 1-3pm, preferably via Zoom).
 
 ##Updated Dec 15: Confirmed Covid and still experiencing symptoms, new deadline is Dec 16 with double extension.
 
@@ -25,13 +24,6 @@ I will use the data from [GDC Portal](https://portal.gdc.cancer.gov/repository).
 ```{bash}
 awk'{print $4}' sample_ID.tsv > sample_ID.txt
 ```
-
-
-
-
-
-
-
 
 
 *********
