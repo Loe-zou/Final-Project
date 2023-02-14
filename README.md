@@ -19,13 +19,6 @@ I identified differentially expressed genes between Stomach Cancer Adenocarcomas
 
 I will use the data from [GDC Portal](https://portal.gdc.cancer.gov/repository). Examining clinical data, there are 190 tumor samples (but 205 files in total, as some samples have relapses and thus two associated files), and 144 are whites and 46 are asians. The specific files are available in the repository [here](https://github.com/Loe-zou/Final-Project/blob/main/clinical.tsv).
 
-## Method - Data Wrangling and Input
-
-```{bash}
-awk'{print $4}' sample_ID.tsv > sample_ID.txt
-```
-
-
 *********
 
 ## Milestone 1
@@ -52,3 +45,13 @@ awk'{print $4}' sample_ID.tsv > sample_ID.txt
 **Due Date:** March 7
 
 A complete repository with clear documentation and description of the analysis and results will be delivered by the due date.
+
+
+## Method - Data Wrangling and Input
+
+```{bash}
+awk'{print $4}' sample_ID.tsv > sample_ID.txt
+```
+
+
+
