@@ -1,6 +1,6 @@
 # Final Project Outline
 
-The makeup for this project starts on Feb 10. The expectaion of completion would be 1 month from the start, ending on March 9. There will be a checkpoint or milestone discussion every Thursday during the period, through Google Calender invitation. The meeting time is subject to change upon negotiation in advance.
+The makeup for this project starts on Feb 10. The expected time of completion would be 1 month from the start, ending on March 9. There will be a checkpoint or milestone discussion every Thursday during the period, through Google Calender invitation. The meeting time is subject to change upon negotiation in advance (either in person or online).
 
 ## Title
 Differential Gene Expression in TCGA within Stage II gastric cancer between asian and white using DeSEQ2.
