@@ -27,7 +27,7 @@ I will use the data from [GDC Portal](https://portal.gdc.cancer.gov/repository).
 
 **Check Point:** Feb 16
 
-**Data Wrangling and
+**Data Wrangling and Loading (Table and Sheets formed
 
 **Due Date:** Feb 23
 
@@ -56,12 +56,13 @@ For each sample file inside the folder, extract the 3rd column (unstranded count
 ```{bash}
 awk'{print$4}' sample_genes.tsv > sample_genes.txt
 ```
-For instance
+For instance,
 ```{bash}
 awk'{print$4}' e6fd3732-7e90-46ec-82fc-d1dcb8849e67.rna_seq.augmented_star_gene_counts.tsv > E6FD.txt
 ```
 
-Replace the header of each sample gene file to match the file name (23 samples selected in total for analysis), credited to EunkSung.
+Replace the header of each sample gene file to match the file name (23 samples selected in total for analysis)
+ **Credited to EunkSung**
 ```
 ./replace_header.sh
 ```
@@ -72,16 +73,51 @@ Extract the gene_id and remove the 1st column from one of the sample files, for 
 awk '{print $1}'e6fd3732-7e90-46ec-82fc-d1dcb8849e67.rna_seq.augmented_star_gene_counts.tsv > ID.txt
 tail -n +2 ID.txt > newID.txt
 ```
-Remove the row 2-4 without printing:
+Remove the row 2-4 (if printed, remove them in the folder):
 ```
-awk '!/^N_*/' newID.txt > newID.tmp && mv newID.tmp newID.txt
+awk '!/^N_*/' newID.txt > newID.txt
 ```
 
 Paste the new gene_id（newID.txt) and each sample counts (txt) together
 ```
-paste gene_id.txt E6FD.txt F6FE.txt 0D85.txt 0FDB.txt 1BA6.txt 1D58.txt 2C5F.txt 5FFC.txt 49A0.txt 59EF.txt 77EE.txt 84CE.txt 69EE.txt 6272.txt 3468.txt 5497.txt 3641.txt B69A.txt B120.txt BD06.txt B502.txt D6BB.txt E1A1.txt
+paste gene_id.txt E6FD.txt F6FE.txt 0D85.txt 0FDB.txt 1BA6.txt 1D58.txt 2C5F.txt 5FFC.txt 49A0.txt 59EF.txt 77EE.txt 84CE.txt 69EE.txt 6272.txt 3468.txt 5497.txt 3641.txt B69A.txt B120.txt BD06.txt B502.txt D6BB.txt E1A1.txt > final_genes.txt
 ```
 
+## Generate Race Table 
+
+Follow the same logic, use awk to extract the column $16 from clinical.tsv > txt and $0 of each sample gene txt to paste them together to redirect into > race_table.csv and race_table.tsv (found in the repo)
+
+
+## R Studio Data Importing
+
+```{r}
+install.packages('BiocManager')
+BiocManager::install(c("DESeq2")
+                     
+library("DESeq2")
+
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design= ~ batch + condition)
+dds <- DESeq(dds)
+resultsNames(dds) # lists the coefficients
+
+BiocManager::install("rnaseqGene")
+
+library(BiocManager)
+BiocManager::install("Named The Package You Need")
+
+setwd('~/Desktop/510makeup')
+
+# matrix matching
+count_matrix <- read.delim("~/Desktop/510makeup/raw/sample_genes.txt", header=T, sep="\t")
+
+# Column change and sample sheet
+row.names(count_matrix) <- count_matrix$gene_id
+count_matrix <- count_matrix[-c(1)]
+
+sampletable <- read_tsv('~/Desktop/510makeup/raw/race_table.tsv')
+```
 
 
 
