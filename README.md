@@ -78,7 +78,7 @@ Remove the row 2-4 (if printed, remove them in the folder):
 awk '!/^N_*/' newID.txt > newID.txt
 ```
 
-Paste the new gene_id（newID.txt) and each sample counts (txt) together
+Paste the new gene_id（newID.txt) and each sample counts (txt) together to obtain the final_genes for package import
 ```
 paste gene_id.txt E6FD.txt F6FE.txt 0D85.txt 0FDB.txt 1BA6.txt 1D58.txt 2C5F.txt 5FFC.txt 49A0.txt 59EF.txt 77EE.txt 84CE.txt 69EE.txt 6272.txt 3468.txt 5497.txt 3641.txt B69A.txt B120.txt BD06.txt B502.txt D6BB.txt E1A1.txt > final_genes.txt
 ```
