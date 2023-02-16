@@ -17,7 +17,7 @@ I identified differentially expressed genes between Stomach Cancer Adenocarcomas
 
 ## Data
 
-I will use the data from [GDC Portal](https://portal.gdc.cancer.gov/repository). By examining the clinical data, there are 190 tumor samples (but 205 files in total, as some samples have relapses and thus two associated files), and 144 are whites and 46 are asians. The specific files are available under this repository ([click to view](https://github.com/Loe-zou/Final-Project/blob/main/clinical.tsv)).
+I will use the data from [GDC Portal](https://portal.gdc.cancer.gov/repository). By examining the clinical data, there are 190 tumor samples (but 205 files in total, as some samples have relapses and thus two associated files), among which 144 are whites and 46 are asians. The specific files are available under this repository ([click to view](https://github.com/Loe-zou/Final-Project/blob/main/clinical.tsv)).
 
 *********
 
@@ -26,9 +26,12 @@ I will use the data from [GDC Portal](https://portal.gdc.cancer.gov/repository).
 > Define the milestone based on initial view of the data.
 
 **Check Point:** Feb 16
+
+**Data Wrangling and
+
 **Due Date:** Feb 23
 
-** Data fully loaded into vignette through DESeq2 steps (Star-Count section) ** Initial analysis through the vignette starts here.
+**Data fully loaded into vignette through DESeq2 steps (Star-Count section) ** Initial analysis through the vignette starts here.
 
 
 ## Milestone 2 
@@ -37,19 +40,49 @@ I will use the data from [GDC Portal](https://portal.gdc.cancer.gov/repository).
 
 **Due Date:** March 2
 
-**An initial completion of vignette.** I will complete an entire first draft of analysis analyzed through the vignette. Data loaded into vignette (through star_count), for seeking feedback.  Not all sections in the writing will be completed, but will be final project.
+**An initial completion of the vignette.** I will complete an entire first draft of the data analysis. Data will be loaded into the vignette (through star_count), marked with errors and bugs, to be discussed with the supervisor. 
 
 ## Deliverable
 
 **Due Date:** March 9
 
-A complete repository with clear documentation and description of the analysis and results will be delivered by the due date.
+A complete repository with clear documentation and description of the analysis with results will be delivered by the due date.
 
-## Method - Data Wrangling and Input
+## Method - Data Wrangling and Inputing (Pre-Process), all in bash/unix
 
+Downloaded from gdc portal, following the data selection for comparation as mentioned above under "Data", the folder labeled "gdc_download_20221115_212727.200657" is found in the local.
+
+For each sample file inside the folder, extract the 3rd column (unstranded counts) and convert it into a txt file, which is named for the first 4 characters of the original file.
 ```{bash}
-awk'{print $4}' sample_ID.tsv > sample_ID.txt
+awk'{print$4}' sample_genes.tsv > sample_genes.txt
 ```
+For instance
+```{bash}
+awk'{print$4}' e6fd3732-7e90-46ec-82fc-d1dcb8849e67.rna_seq.augmented_star_gene_counts.tsv > E6FD.txt
+```
+
+Replace the header of each sample gene file to match the file name (23 samples selected in total for analysis), credited to EunkSung.
+```
+./replace_header.sh
+```
+
+Extract the gene_id and remove the 1st column from one of the sample files, for instance:
+
+```
+awk '{print $1}'e6fd3732-7e90-46ec-82fc-d1dcb8849e67.rna_seq.augmented_star_gene_counts.tsv > ID.txt
+tail -n +2 ID.txt > newID.txt
+```
+Remove the row 2-4 without printing:
+```
+awk '!/^N_*/' newID.txt > newID.tmp && mv newID.tmp newID.txt
+```
+
+Paste the new gene_id（newID.txt) and each sample counts (txt) together
+```
+paste gene_id.txt E6FD.txt F6FE.txt 0D85.txt 0FDB.txt 1BA6.txt 1D58.txt 2C5F.txt 5FFC.txt 49A0.txt 59EF.txt 77EE.txt 84CE.txt 69EE.txt 6272.txt 3468.txt 5497.txt 3641.txt B69A.txt B120.txt BD06.txt B502.txt D6BB.txt E1A1.txt
+```
+
+
 
 
 
