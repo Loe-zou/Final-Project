@@ -90,6 +90,8 @@ Follow the same logic, use awk to extract the column $16 from clinical.tsv > txt
 
 ## R Studio Data Importing
 
+Here is the instruction from the bioconductor to set up the filtering:
+
 ```{r}
 install.packages('BiocManager')
 BiocManager::install(c("DESeq2")
@@ -118,7 +120,6 @@ count_matrix <- count_matrix[-c(1)]
 
 sampletable <- read_tsv('~/Desktop/510makeup/raw/race_table.tsv')
 ```
-
 
 
 
