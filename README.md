@@ -1,3 +1,5 @@
+Commit Feb 28
+================
 510Makeup
 ================
 # Final Project Outline
@@ -121,8 +123,6 @@ row.names(count_matrix) <- count_matrix$gene_id
 count_matrix <- count_matrix[-c(1)]
 
 sampletable <- read_tsv('~/Desktop/510makeup/raw/race_table.tsv')
-```
-
 ## Part 1
 
 ``` r
@@ -141,7 +141,9 @@ BiocManager::install("DeSeq2")
 
     ## Warning: Perhaps you meant 'DESeq2' ?
 
-    ## Old packages: 'BiocManager', 'RcppArmadillo'
+    ## Old packages: 'BiocManager', 'cachem', 'dbplyr', 'dtplyr', 'fastmap',
+    ##   'Formula', 'haven', 'httr', 'igraph', 'RcppArmadillo', 'RcppNumerical',
+    ##   'S4Vectors'
 
 ``` r
 BiocManager::install("dplyr")
@@ -152,7 +154,9 @@ BiocManager::install("dplyr")
     ## Warning: package(s) not installed when version(s) same as or greater than current; use
     ##   `force = TRUE` to re-install: 'dplyr'
 
-    ## Old packages: 'BiocManager', 'RcppArmadillo'
+    ## Old packages: 'BiocManager', 'cachem', 'dbplyr', 'dtplyr', 'fastmap',
+    ##   'Formula', 'haven', 'httr', 'igraph', 'RcppArmadillo', 'RcppNumerical',
+    ##   'S4Vectors'
 
 ``` r
 BiocManager::install("apeglm")
@@ -163,7 +167,9 @@ BiocManager::install("apeglm")
     ## Warning: package(s) not installed when version(s) same as or greater than current; use
     ##   `force = TRUE` to re-install: 'apeglm'
 
-    ## Old packages: 'BiocManager', 'RcppArmadillo'
+    ## Old packages: 'BiocManager', 'cachem', 'dbplyr', 'dtplyr', 'fastmap',
+    ##   'Formula', 'haven', 'httr', 'igraph', 'RcppArmadillo', 'RcppNumerical',
+    ##   'S4Vectors'
 
 ``` r
 BiocManager::install("vsn")
@@ -174,7 +180,9 @@ BiocManager::install("vsn")
     ## Warning: package(s) not installed when version(s) same as or greater than current; use
     ##   `force = TRUE` to re-install: 'vsn'
 
-    ## Old packages: 'BiocManager', 'RcppArmadillo'
+    ## Old packages: 'BiocManager', 'cachem', 'dbplyr', 'dtplyr', 'fastmap',
+    ##   'Formula', 'haven', 'httr', 'igraph', 'RcppArmadillo', 'RcppNumerical',
+    ##   'S4Vectors'
 
 ``` r
 BiocManager::install("pheatmap")
@@ -185,7 +193,9 @@ BiocManager::install("pheatmap")
     ## Warning: package(s) not installed when version(s) same as or greater than current; use
     ##   `force = TRUE` to re-install: 'pheatmap'
 
-    ## Old packages: 'BiocManager', 'RcppArmadillo'
+    ## Old packages: 'BiocManager', 'cachem', 'dbplyr', 'dtplyr', 'fastmap',
+    ##   'Formula', 'haven', 'httr', 'igraph', 'RcppArmadillo', 'RcppNumerical',
+    ##   'S4Vectors'
 
 ``` r
 library(DESeq2)
@@ -366,6 +376,8 @@ library(ReportingTools)
     ##   method from   
     ##   +.gg   ggplot2
 
+## 
+
 ``` r
 setwd('~/Desktop/510makeup/')
 
@@ -416,7 +428,7 @@ nrow(DES_dataset)
 
 DES_dataset <- DES_dataset[rowSums(counts(DES_dataset)) > 10, ]
 
-# Number of gene after filtering
+# Number of gene after pre-filtering (genes longer than 10 reads have been filtered out, and let's check the filtered data load)
 nrow(DES_dataset)
 ```
 
@@ -445,3 +457,143 @@ DES_dataset <- DESeq(DES_dataset)
     ## estimating dispersions
 
     ## fitting model and testing
+
+Now print new dataset to a result variable
+
+``` r
+res <- results(DES_dataset)
+head(res)
+```
+
+    ## log2 fold change (MLE): race white vs asian 
+    ## Wald test p-value: race white vs asian 
+    ## DataFrame with 6 rows and 6 columns
+    ##                      baseMean log2FoldChange     lfcSE      stat      pvalue
+    ##                     <numeric>      <numeric> <numeric> <numeric>   <numeric>
+    ## ENSG00000000003.15 3677.53281      -0.722513  0.488345 -1.479513 1.39003e-01
+    ## ENSG00000000005.6     9.71369      -5.172131  0.762090 -6.786771 1.14671e-11
+    ## ENSG00000000419.13 3121.57711       0.484119  0.205231  2.358897 1.83293e-02
+    ## ENSG00000000457.14  922.96450       0.208729  0.196649  1.061428 2.88495e-01
+    ## ENSG00000000460.17  620.94701       0.221609  0.289542  0.765378 4.44047e-01
+    ## ENSG00000000938.13  577.54322      -1.067189  0.395132 -2.700843 6.91639e-03
+    ##                           padj
+    ##                      <numeric>
+    ## ENSG00000000003.15 6.02450e-01
+    ## ENSG00000000005.6  2.91585e-07
+    ## ENSG00000000419.13 3.00696e-01
+    ## ENSG00000000457.14 7.46333e-01
+    ## ENSG00000000460.17 8.41930e-01
+    ## ENSG00000000938.13 2.01566e-01
+
+The results look good, here is an illustration on the 6 features
+(credited to bigyambat): \#Base Mean = Average of the normalized count
+values \#log2(FoldChange) = Change in gene expression between male and
+female \#lfcSE = Standard Error of the log2 fold change values \#stat =
+Wald’s test to determine the weighted distance between gene expression
+\#pvalue = Hypothesis test to tell whether expression difference is
+significant \#padj = Adjusted P values based on the Benjamini-Hochberg
+adjustment
+
+Specify the coefficient or contrast we want to build a results table
+for, using either of the following equivalent commands:
+
+``` r
+res <- results(DES_dataset, contrast=c("race","asian","white"))
+```
+
+\##Log fold change shrinkage for visualization and ranking
+
+``` r
+resultsNames(DES_dataset)
+```
+
+    ## [1] "Intercept"           "race_white_vs_asian"
+
+``` r
+resLFC <- lfcShrink(DES_dataset, coef="race_white_vs_asian", type="apeglm")
+```
+
+    ## using 'apeglm' for LFC shrinkage. If used in published research, please cite:
+    ##     Zhu, A., Ibrahim, J.G., Love, M.I. (2018) Heavy-tailed prior distributions for
+    ##     sequence count data: removing the noise and preserving large differences.
+    ##     Bioinformatics. https://doi.org/10.1093/bioinformatics/bty895
+
+``` r
+resLFC
+```
+
+    ## log2 fold change (MAP): race white vs asian 
+    ## Wald test p-value: race white vs asian 
+    ## DataFrame with 49354 rows and 5 columns
+    ##                      baseMean log2FoldChange      lfcSE      pvalue        padj
+    ##                     <numeric>      <numeric>  <numeric>   <numeric>   <numeric>
+    ## ENSG00000000003.15 3677.53281   -3.32891e-06 0.00144269 1.39003e-01 6.02450e-01
+    ## ENSG00000000005.6     9.71369   -4.93838e+00 0.76437682 1.14671e-11 2.91585e-07
+    ## ENSG00000000419.13 3121.57711    1.16746e-05 0.00144269 1.83293e-02 3.00696e-01
+    ## ENSG00000000457.14  922.96450    5.50915e-06 0.00144266 2.88495e-01 7.46333e-01
+    ## ENSG00000000460.17  620.94701    5.15354e-06 0.00144268 4.44047e-01 8.41930e-01
+    ## ...                       ...            ...        ...         ...         ...
+    ## ENSG00000288660.1   68.018094    1.38339e-07 0.00144269  0.66719017    0.923584
+    ## ENSG00000288662.1    3.291373    2.57778e-06 0.00144269  0.04119310          NA
+    ## ENSG00000288663.1   40.485113    7.93165e-06 0.00144270  0.00645508    0.195882
+    ## ENSG00000288667.1    3.650157    1.16770e-06 0.00144269  0.33861921          NA
+    ## ENSG00000288669.1    0.537648   -3.66298e-07 0.00144269  0.65789964          NA
+
+Citation for using apeglm: Zhu, A., Ibrahim, J.G., Love, M.I. (2018)
+Heavy-tailed prior distributions for sequence count data: removing the
+noise and preserving large differences. Bioinformatics.
+<https://doi.org/10.1093/bioinformatics/bty895>
+
+## P-Values and Adjusted P-Values
+
+First, order the result table by its smallest p-value:
+
+``` r
+resOrdered <- res[order(res$pvalue),]
+```
+
+Summarize basic tallies:
+
+``` r
+summary(res)
+```
+
+    ## 
+    ## out of 49344 with nonzero total read count
+    ## adjusted p-value < 0.1
+    ## LFC > 0 (up)       : 137, 0.28%
+    ## LFC < 0 (down)     : 185, 0.37%
+    ## outliers [1]       : 0, 0%
+    ## low counts [2]     : 23926, 48%
+    ## (mean count < 9)
+    ## [1] see 'cooksCutoff' argument of ?results
+    ## [2] see 'independentFiltering' argument of ?results
+
+P-Values (\< 0.1)
+
+``` r
+sum(res$padj < 0.1, na.rm=TRUE)
+```
+
+    ## [1] 322
+
+## MA Plots
+
+``` r
+plotMA(res, ylim=c(-2,2))
+```
+
+![](new_files/figure-gfm/unnamed-chunk-15-1.png)<!-- --> Shrunken Genes
+Plot (log2 fold changes)
+
+``` r
+plotMA(resLFC, ylim=c(-2,2))
+```
+
+![](new_files/figure-gfm/unnamed-chunk-16-1.png)<!-- --> Plot Counts
+
+``` r
+plotCounts(DES_dataset, gene = which.min(res$padj), intgroup = "race")
+```
+
+![](new_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
