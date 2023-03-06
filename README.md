@@ -70,39 +70,35 @@ awk'{print$4}' e6fd3732-7e90-46ec-82fc-d1dcb8849e67.rna_seq.augmented_star_gene_
 
 Replace the header of each sample gene file to match the file name (23 samples selected in total for analysis)
  **Credited to EunkSung**
-```
+```{bash}
 ./replace_header.sh
 ```
 
 Extract the gene_id and remove the 1st column from one of the sample files, for instance:
 
-```
+```{bash}
 awk '{print $1}'e6fd3732-7e90-46ec-82fc-d1dcb8849e67.rna_seq.augmented_star_gene_counts.tsv > ID.txt
 tail -n +2 ID.txt > newID.txt
 ```
 Remove the row 2-4 (if printed, remove them in the folder):
-```
+```{bash}
 awk '!/^N_*/' newID.txt > newID.txt
 ```
 
 Paste the new gene_id（newID.txt) and each sample counts (txt) together to obtain the final_genes for package import
-```
+```{bash}
 paste gene_id.txt E6FD.txt F6FE.txt 0D85.txt 0FDB.txt 1BA6.txt 1D58.txt 2C5F.txt 5FFC.txt 49A0.txt 59EF.txt 77EE.txt 84CE.txt 69EE.txt 6272.txt 3468.txt 5497.txt 3641.txt B69A.txt B120.txt BD06.txt B502.txt D6BB.txt E1A1.txt > final_genes.txt
 ```
 
 ## Generate Race Table (bash)
 
-Follow the same logic from above, in bash, use awk to extract the column $16 from clinical.tsv > txt and $0 of each sample gene txt to paste them together to redirect into > race_table.csv and race_table.tsv (please find in the repository)
 
-Extract the gene IDs from final_genes file and convert the row name into the first column name:
-```
-#Extract Sample_ID into a new table and convert the row into column
-
-```
+Extract Sample_ID into a new table and convert the row into the first column
+```{bash}
 awk 'NR==1 {print; exit}' final_genes.txt > row_final.tsv
 ```
-Change the row_final into first column including all gene/sample IDs using xargs:
 
+Change the row_final into first column including all gene/sample IDs using xargs:
 ```
 xargs -n1 < row_final.tsv > column_final.tsv
 ```
@@ -111,8 +107,8 @@ Select the race column (white/asian) from the clinical table and extract the fir
 ```
 awk -F"\t" '{print $16} NR==23{exit}'clinical.tsv > race.tsv
 ```
-Paste and re-direct them to the new race table:
 
+Paste and re-direct them to the new race table:
 ```
 paste column_final.tsv race.tsv > race_table.tsv
 ```
