@@ -54,9 +54,9 @@ The data is collected from [GDC Portal](https://portal.gdc.cancer.gov/repository
 
 A complete repository with clear documentation and description of the analysis with results will be delivered by the due date.
 
-# Part 1: Data Wrangling of the Raw (all in bash/unix, found all relevant result and program file under "Part1" folder)
+# Part 1: Data Wrangling of the Raw (all in bash/unix, all relevant result and program file can be found under "Part1" folder)
 
-## Data download and adjustment (Merged Counts)
+## Data download and adjustment (Merged Counts, data samples found in "GDC Download Raw Data" folder)
 Downloaded raw data from gdc portal, following the data selection for comparation as mentioned above under "Data", and the corresponding folder labeled "gdc_download_20221115_212727.200657" can be found in the local.
 
 For each sample file inside the folder, extract the 3rd column (unstranded counts) and convert it into a txt file, which is named for the first 4 characters of the original file.
