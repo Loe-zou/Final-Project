@@ -588,26 +588,27 @@ Plot for all genes after filtering
 plotMA(res, ylim=c(-2,2))
 ```
 
-![](new_files/figure-gfm/unnamed-chunk-15-1.png)<!-- --> Shrunken Genes
-Plot (log2 fold changes)
+![](new_files/figure-gfm/unnamed-chunk-15-1.png)<!-- --> 
+
+Shrunken Genes Plot (log2 fold changes)
 
 ``` r
 plotMA(resLFC, ylim=c(-2,2))
 ```
 
-![](new_files/figure-gfm/unnamed-chunk-16-1.png)<!-- --> \## More on
-Plot Counts Variable of interest, in the case, indicated as ‘race’
+![](new_files/figure-gfm/unnamed-chunk-16-1.png)<!-- --> 
+
+## More on Plot Counts Variable of interest, in the case, indicated as ‘race’
 
 ``` r
 plotCounts(DES_dataset, gene = which.min(res$padj), intgroup = "race")
 ```
 
-![](new_files/figure-gfm/unnamed-chunk-17-1.png)<!-- --> \## Data
-transformations and visualization: Extracting transformed values through
-VST(vsd) and RLT(rld)
+![](new_files/figure-gfm/unnamed-chunk-17-1.png)<!-- --> 
 
-Prepare for a long execution time… Sys.time to see how long it might
-take
+## Data transformations and visualization: Extracting transformed values through VST(vsd) and RLT(rld)
+
+Prepare for a long execution time…  Apply Sys.time to see how long it might take...
 
 ``` r
 # code chunk
@@ -626,13 +627,18 @@ print(execution_time)
     ##    user  system elapsed 
     ##  -0.071   0.000  -0.071
 
-Extracting transformed values through VST(vsd) and RLT(rld) - stuck…
+Extracting transformed values through VST(vsd) and RLT(rld) 
 
 ``` r
 vsd <- vst(DES_dataset, blind = FALSE)
 rld <- rlog(DES_dataset, blind=FALSE)
 ```
+```
+## rlog() may take a long time with 50 or more samples,
+## vst() is a much faster transformation
+```
 
+Check the head results after finish
 ``` r
 head(assay(vsd), 5)
 ```
@@ -685,7 +691,7 @@ meanSdPlot(assay(vsd))
 
 ## Sample clustering and visualization (heatmap for further quality assessment)
 
-1.  Normal Transformation Heatmap
+1. Normal Transformation Heatmap
 
 ``` r
 library("pheatmap")
@@ -706,22 +712,24 @@ pheatmap(assay(ntd)[select,], cluster_rows=FALSE, show_rownames=FALSE,
 
 ![](new_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
-2.  Variance Stablizing Transformation Heatmap
+2. Variance Stablizing Transformation Heatmap
 
 ``` r
 pheatmap(assay(vsd)[select,], cluster_rows=FALSE, show_rownames=FALSE, cluster_cols=FALSE, annotation_col=df)
 ```
 
-![](new_files/figure-gfm/unnamed-chunk-24-1.png)<!-- --> 3.Regularized
-log Transformation Heatmap
+![](new_files/figure-gfm/unnamed-chunk-24-1.png)<!-- --> 
+
+3. Regularized log Transformation Heatmap
 
 ``` r
 pheatmap(assay(rld)[select,], cluster_rows=FALSE, show_rownames=FALSE,
          cluster_cols=FALSE, annotation_col=df)
 ```
 
-![](new_files/figure-gfm/unnamed-chunk-25-1.png)<!-- --> \## Sample to
-Sample Distances
+![](new_files/figure-gfm/unnamed-chunk-25-1.png)<!-- --> 
+
+## Sample to Sample Distances
 
 ``` r
 sampleDists <- dist(t(assay(vsd)))
@@ -729,8 +737,9 @@ DistMatrix <- as.matrix(sampleDists)
 pheatmap(DistMatrix)
 ```
 
-![](new_files/figure-gfm/unnamed-chunk-26-1.png)<!-- --> \## Principal
-Componant Analysis
+![](new_files/figure-gfm/unnamed-chunk-26-1.png)<!-- --> 
+
+## Principal Componant Analysis
 
 Plot:
 
@@ -738,5 +747,7 @@ Plot:
 plotPCA(vsd, intgroup="race")
 ```
 
-![](new_files/figure-gfm/unnamed-chunk-27-1.png)<!-- --> The plotshows a
-14-15% variance (2 PCs) between the two groups
+![](new_files/figure-gfm/unnamed-chunk-27-1.png)<!-- --> 
+**The plotshows a 14-15% variance (2 PCs) between the two groups**
+
+### Please find the HUGO final_genes file in the repository. 
