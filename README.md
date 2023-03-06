@@ -54,7 +54,7 @@ The data is collected from [GDC Portal](https://portal.gdc.cancer.gov/repository
 
 A complete repository with clear documentation and description of the analysis with results will be delivered by the due date.
 
-# Part 1 - Data Wrangling of the Raw (all in bash/unix)
+# Part 1: Data Wrangling of the Raw (all in bash/unix, found all relevant result and program file under "Part1" folder)
 
 ## Data download and adjustment (Merged Counts)
 Downloaded raw data from gdc portal, following the data selection for comparation as mentioned above under "Data", and the corresponding folder labeled "gdc_download_20221115_212727.200657" can be found in the local.
@@ -99,23 +99,23 @@ awk 'NR==1 {print; exit}' final_genes.txt > row_final.tsv
 ```
 
 Change the row_final into first column including all gene/sample IDs using xargs:
-```
+```{bash}
 xargs -n1 < row_final.tsv > column_final.tsv
 ```
 
 Select the race column (white/asian) from the clinical table and extract the first 23 samples:
-```
+```{bash}
 awk -F"\t" '{print $16} NR==23{exit}'clinical.tsv > race.tsv
 ```
 
 Paste and re-direct them to the new race table:
-```
+```{bash}
 paste column_final.tsv race.tsv > race_table.tsv
 ```
 
-# Part 2 R Studio Data Import (Unit test Passila is skipped as the loaded dataset works fine along analysis process)
+# Part 2: R Studio Data Import (Unit test Passila is skipped as the loaded dataset works fine along analysis process)
 
-## Install packages
+## Install packages needed
 
 ``` r
 BiocManager::install("DeSeq2")
@@ -404,8 +404,9 @@ DES_dataset <- DESeqDataSetFromMatrix(countData = count_matrix,
                                       design = ~ race)
 ```
 
-## Filtering and Standard Differential Expression Analysis
+# Part 3: Filtering and Differential Expression Analysis
 
+## Prefiltering
 ``` r
 #pre-filtering
 nrow(DES_dataset)
@@ -413,14 +414,16 @@ nrow(DES_dataset)
 
     ## [1] 60656
 
+## DES_dataset generation and filtering based on length
+
 ``` r
 #keep <- rowSums(counts(dds)) >= 10
 #dds <- dds[keep,]
-## Void test lines
+## Those are just void test lines
 
 DES_dataset <- DES_dataset[rowSums(counts(DES_dataset)) > 10, ]
 
-# Number of gene after pre-filtering (genes longer than 10 reads have been filtered out, and let's check the filtered data load)
+# Number of gene after pre-filtering (genes shorter than 10 reads have been filtered out, and let's check the filtered data load)
 nrow(DES_dataset)
 ```
 
@@ -450,7 +453,7 @@ DES_dataset <- DESeq(DES_dataset)
 
     ## fitting model and testing
 
-## Now print new data set to a result variable and peak the head
+## Print new data set to a result variable and peak the head
 
 ``` r
 res <- results(DES_dataset)
@@ -573,6 +576,9 @@ sum(res$padj < 0.1, na.rm=TRUE)
 ```
 
     ## [1] 322
+
+
+# Part 4: Exploring and exporting results （dataset visulization and plotting)
 
 ## MA Plots (shows log2fold difference, normalized counts)
 
