@@ -670,6 +670,8 @@ head(assay(vsd), 5)
 
 ## Variance Plots (Transformation)
 
+ntd measurement:
+
 ``` r
 ntd <- normTransform(DES_dataset)
 meanSdPlot(assay(ntd))
@@ -681,7 +683,7 @@ meanSdPlot(assay(ntd))
 
 ![](new_files/figure-gfm/unnamed-chunk-21-1.png)<!-- --> 
 
-VST measurement
+VST measurement:
 
 ``` r
 meanSdPlot(assay(vsd))
@@ -691,7 +693,7 @@ meanSdPlot(assay(vsd))
 
 ## Sample clustering and visualization (heatmap for further quality assessment)
 
-1. Normal Transformation Heatmap
+1. Normal Transformation Heatmap:
 
 ``` r
 library("pheatmap")
@@ -712,7 +714,7 @@ pheatmap(assay(ntd)[select,], cluster_rows=FALSE, show_rownames=FALSE,
 
 ![](new_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
-2. Variance Stablizing Transformation Heatmap
+2. Variance Stablizing Transformation Heatmap:
 
 ``` r
 pheatmap(assay(vsd)[select,], cluster_rows=FALSE, show_rownames=FALSE, cluster_cols=FALSE, annotation_col=df)
@@ -720,7 +722,7 @@ pheatmap(assay(vsd)[select,], cluster_rows=FALSE, show_rownames=FALSE, cluster_c
 
 ![](new_files/figure-gfm/unnamed-chunk-24-1.png)<!-- --> 
 
-3. Regularized log Transformation Heatmap
+3. Regularized log Transformation Heatmap:
 
 ``` r
 pheatmap(assay(rld)[select,], cluster_rows=FALSE, show_rownames=FALSE,
@@ -736,6 +738,7 @@ sampleDists <- dist(t(assay(vsd)))
 DistMatrix <- as.matrix(sampleDists)
 pheatmap(DistMatrix)
 ```
+Plot:
 
 ![](new_files/figure-gfm/unnamed-chunk-26-1.png)<!-- --> 
 
@@ -750,4 +753,4 @@ plotPCA(vsd, intgroup="race")
 ![](new_files/figure-gfm/unnamed-chunk-27-1.png)<!-- --> 
 **The plotshows a 14-15% variance (2 PCs) between the two groups**
 
-### Please find the HUGO final_genes file in the repository. 
+**Please find the HUGO final_genes file in the repository. **
