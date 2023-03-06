@@ -673,14 +673,17 @@ meanSdPlot(assay(ntd))
 
     ## Also defined by 'hexbin'
 
-![](new_files/figure-gfm/unnamed-chunk-21-1.png)<!-- --> VST measurement
+![](new_files/figure-gfm/unnamed-chunk-21-1.png)<!-- --> 
+
+VST measurement
 
 ``` r
 meanSdPlot(assay(vsd))
 ```
 
-![](new_files/figure-gfm/unnamed-chunk-22-1.png)<!-- --> \## Sample
-clustering and visualization (heatmap for further quality assessment)
+![](new_files/figure-gfm/unnamed-chunk-22-1.png)<!-- --> 
+
+## Sample clustering and visualization (heatmap for further quality assessment)
 
 1.  Normal Transformation Heatmap
 
