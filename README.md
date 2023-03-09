@@ -50,7 +50,7 @@ The data is collected from [GDC Portal](https://portal.gdc.cancer.gov/repository
 
 ## Deliverable
 
-**Due Date:** March 9 (Data Wrangling and DESeq2 done on Mar 5, to-do: HUGO genes CSV upload)
+**Due Date:** March 9 (Data Wrangling and DESeq2 done on Mar 5, to-do: HUGO genes CSV upload - uploaded on March 9)
 
 A complete repository with clear documentation and description of the analysis with results will be delivered by the due date.
 
@@ -751,6 +751,15 @@ plotPCA(vsd, intgroup="race")
 ```
 
 ![](new_files/figure-gfm/unnamed-chunk-27-1.png)<!-- --> 
+
+
 **The plotshows a 14-15% variance (2 PCs) between the two groups**
 
 **Please find the HUGO final_genes file in the repository. **
+
+Updated on March 9 3pm:
+The ENSEMBLE IDs (final_genes) have been converted to HUGOs and uploaded to the repository.
+
+Ref:
+BioMart (ENSEMBLE): http://useast.ensembl.org/biomart/martview/884cd6ea3dce3e0bdb2c91c8532277af
+Detailed tutorial: https://www.youtube.com/watch?v=cWe359VnfaY&ab_channel=Bioinformagician
